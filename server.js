@@ -1,9 +1,9 @@
+var port = process.env.PORT || 3000;
 var express = require("express");
 var ejs = require('ejs');
 var request = require('request');
 var url = require('url');
 var app = express();
-var port = 3000;
 
 app.use(express.static('public'));
 var bodyParser = require('body-parser');
@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
   res.render('index');
 })
 
-app.post("/submit", (req, res) => {
+app.post("/submit", function(req, res) {
  var myData = new User(req.body);
  myData.save()
  .then(item => {
@@ -38,6 +38,6 @@ app.post("/submit", (req, res) => {
  });
 });
  
-app.listen(port, () => {
+app.listen(port, function() {
  console.log("Server listening on port " + port);
 });
